@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+# NYX shim: stands in for `slurp` when hyprshot asks for a region.
+# The region was already chosen in the Quickshell UI; its geometry is in $NYX_GEOM_FILE
+# ("x,y wxh"). Cancelling is handled in the UI (nothing is launched), so this
+# only ever answers with a finished selection.
+[ -n "${NYX_PROBE:-}" ] && : > "$NYX_PROBE"
+
+f="${NYX_GEOM_FILE:-}"
+[ -n "$f" ] && [ -s "$f" ] || exit 1
+
+fmt=""
+while [ $# -gt 0 ]; do
+    case "$1" in
+        -f) fmt="${2:-}"; shift 2 ;;
+        *) shift ;;
+    esac
+done
+
+read -r pos size < "$f"
+x="${pos%,*}"; y="${pos#*,}"; w="${size%x*}"; h="${size#*x}"
+
+if [ -z "$fmt" ]; then
+    printf '%s,%s %sx%s\n' "$x" "$y" "$w" "$h"
+else
+    out="${fmt//%x/$x}"; out="${out//%y/$y}"; out="${out//%w/$w}"; out="${out//%h/$h}"
+    out="${out//%l/}"; out="${out//%o/}"
+    printf '%s\n' "$out"
+fi

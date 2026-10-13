@@ -1,0 +1,7 @@
+singleton Config Config.qml
+CaptureOverlay CaptureOverlay.qml
+Rope Rope.qml
+Bracket Bracket.qml
+Glass Glass.qml
+GlassButton GlassButton.qml
+Glyph Glyph.qml

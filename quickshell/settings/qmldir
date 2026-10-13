@@ -1,0 +1,11 @@
+singleton Theme Theme.qml
+singleton HyprSettings HyprSettings.qml
+SettingsWindow SettingsWindow.qml
+SettingsPage SettingsPage.qml
+PreviewPane PreviewPane.qml
+AnimButton AnimButton.qml
+CornerDeco CornerDeco.qml
+Icon Icon.qml
+SliderRow SliderRow.qml
+SwitchRow SwitchRow.qml
+ColorRow ColorRow.qml
